@@ -5,8 +5,8 @@ SQLite Demo App
 
 * **Model** (**[UserDBHelper](./app/src/main/java/com/example/sqliteapp/UserDBHelper.java)**):
   * Handles database operations.
-  * The UserDBHelper class is responsible for handling the **data-related operations**, such as **creating**, **updating**, and **querying** the database.
-  * The UserContract.UserEntry class defines the schema of the database.
+  * The **UserDBHelper** class is responsible for handling the **data-related operations**, such as **creating**, **updating**, and **querying** the database.
+  * The **[UserContract.UserEntry](./app/src/main/java/com/example/sqliteapp/UserContract.java)** class defines the schema of the database.
     
 * **View** (UserDataAdapter):
   * Manages the RecyclerView and binds data to the UI.
