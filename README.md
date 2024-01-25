@@ -1,6 +1,8 @@
 SQLite Demo App
 ========
 
+### SQLite Demo App showcases the basic functionality of CURD operations using SQLite
+
 ### Responsibilities are well-separated:
 
 * **Model** (**[UserDBHelper](./app/src/main/java/com/example/sqliteapp/model/UserDBHelper.java)**):
