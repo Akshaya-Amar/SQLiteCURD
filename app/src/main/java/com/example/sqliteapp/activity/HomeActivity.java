@@ -1,17 +1,18 @@
 package com.example.sqliteapp.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.sqliteapp.CustomDialog;
 import com.example.sqliteapp.R;
-import com.example.sqliteapp.model.UserDBHelper;
 import com.example.sqliteapp.adapter.UserDataAdapter;
 import com.example.sqliteapp.databinding.ActivityHomeBinding;
+import com.example.sqliteapp.model.UserDBHelper;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -46,53 +47,60 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         int id = view.getId();
 
         if (id == R.id.add) {
-
-            boolean isUserAdded = addUser();
-
-            if (isUserAdded) {
-                adapter.updateDisplayList(dbHelper.getAllRecords());
-                Toast.makeText(this, "New User Added", Toast.LENGTH_SHORT).show();
-            }
+            addUser();
         } else if (id == R.id.update) {
-
-            int rowsAffected = updateUser();
-
-            if (rowsAffected != 0) {
-                adapter.updateDisplayList(dbHelper.getAllRecords());
-                Toast.makeText(this, "User Updated", Toast.LENGTH_SHORT).show();
-            }
+            updateUser();
         } else if (id == R.id.delete) {
-
-            boolean isUserDeleted = deleteUser();
-
-            if (isUserDeleted) {
-                adapter.updateDisplayList(dbHelper.getAllRecords());
-                Toast.makeText(this, "User Deleted ", Toast.LENGTH_SHORT).show();
-            }
+            deleteUser();
         }
     }
 
-    private boolean addUser() {
+    private void addUser() {
 
         String name = binding.nameEditText.getText().toString().trim();
         int age = Integer.parseInt(binding.ageEditText.getText().toString());
         long number = Long.parseLong(binding.numberEditText.getText().toString());
 
-        return dbHelper.addUserRecord(name, age, number) != -1;
+        long rowId = dbHelper.addUserRecord(name, age, number);
+        if (rowId != -1) {
+            adapter.updateDisplayList(dbHelper.getAllRecords());
+            Toast.makeText(this, "New User Added", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    private int updateUser() {
+    private void updateUser() {
 
-        int userId = Integer.parseInt(binding.idEditText.getText().toString());
-        String name = binding.nameEditText.getText().toString().trim();
-        int age = Integer.parseInt(binding.ageEditText.getText().toString());
-        long number = Long.parseLong(binding.numberEditText.getText().toString());
+        CustomDialog dialog = new CustomDialog("update");
+        dialog.setCancelable(false);
+        dialog.setCustomDialogListener(userId -> {
 
-        return dbHelper.updateUserRecord(userId, name, age, number);
+            String name = binding.nameEditText.getText().toString().trim();
+            int age = Integer.parseInt(binding.ageEditText.getText().toString());
+            long number = Long.parseLong(binding.numberEditText.getText().toString());
+
+            int rowsAffected = dbHelper.updateUserRecord(userId, name, age, number);
+            if (rowsAffected != 0) {
+                adapter.updateDisplayList(dbHelper.getAllRecords());
+                Toast.makeText(HomeActivity.this, "User Updated", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.show(getSupportFragmentManager(), "custom dialog");
     }
 
-    private boolean deleteUser() {
-        int userId = Integer.parseInt(binding.idEditText.getText().toString());
-        return dbHelper.deleteUserRecord(userId) != 0;
+    private void deleteUser() {
+
+        CustomDialog dialog = new CustomDialog("delete");
+        dialog.setCancelable(false);
+        dialog.setCustomDialogListener(userId -> {
+
+            int result = dbHelper.deleteUserRecord(userId);
+            if (result != 0) {
+                adapter.updateDisplayList(dbHelper.getAllRecords());
+                Toast.makeText(HomeActivity.this, "User Deleted", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.show(getSupportFragmentManager(), "custom dialog");
     }
 }

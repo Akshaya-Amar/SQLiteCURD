@@ -34,7 +34,7 @@ public class UserDataAdapter extends RecyclerView.Adapter<UserDataAdapter.ViewHo
         if (cursor.moveToPosition(position)) {
 
             int idColumnIndex = cursor.getColumnIndex(UserContract.UserEntry._ID);
-            holder.binding.idTextView.setText(String.valueOf(cursor.getInt(idColumnIndex)));
+            holder.binding.idTextView.setText("ID: " + cursor.getInt(idColumnIndex));
 
             int nameColumnIndex = cursor.getColumnIndex(UserContract.UserEntry.COLUMN_NAME);
             holder.binding.nameTextView.setText(cursor.getString(nameColumnIndex));
