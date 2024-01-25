@@ -64,7 +64,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         long rowId = dbHelper.addUserRecord(name, age, number);
         if (rowId != -1) {
             adapter.updateDisplayList(dbHelper.getAllRecords());
-            Toast.makeText(this, "New User Added", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "New User Added " + rowId, Toast.LENGTH_SHORT).show();
         }
     }
 
