@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sqliteapp.UserContract;
+import com.example.sqliteapp.model.UserContract;
 import com.example.sqliteapp.databinding.UserItemsBinding;
 
 public class UserDataAdapter extends RecyclerView.Adapter<UserDataAdapter.ViewHolder> {

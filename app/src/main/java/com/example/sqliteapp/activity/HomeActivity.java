@@ -1,15 +1,15 @@
-package com.example.sqliteapp;
+package com.example.sqliteapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.sqliteapp.R;
+import com.example.sqliteapp.model.UserDBHelper;
 import com.example.sqliteapp.adapter.UserDataAdapter;
 import com.example.sqliteapp.databinding.ActivityHomeBinding;
 
