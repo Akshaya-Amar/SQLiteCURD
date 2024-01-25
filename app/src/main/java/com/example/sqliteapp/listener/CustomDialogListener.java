@@ -1,4 +1,4 @@
-package com.example.listener;
+package com.example.sqliteapp.listener;
 
 public interface CustomDialogListener {
 

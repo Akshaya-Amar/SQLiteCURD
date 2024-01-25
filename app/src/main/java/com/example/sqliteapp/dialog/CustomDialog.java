@@ -1,4 +1,4 @@
-package com.example.sqliteapp;
+package com.example.sqliteapp.dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import com.example.listener.CustomDialogListener;
+import com.example.sqliteapp.listener.CustomDialogListener;
 import com.example.sqliteapp.databinding.CustomDialogLayoutBinding;
 
 public class CustomDialog extends AppCompatDialogFragment {
