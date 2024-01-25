@@ -95,5 +95,4 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         int userId = Integer.parseInt(binding.idEditText.getText().toString());
         return dbHelper.deleteUserRecord(userId) != 0;
     }
-
 }
